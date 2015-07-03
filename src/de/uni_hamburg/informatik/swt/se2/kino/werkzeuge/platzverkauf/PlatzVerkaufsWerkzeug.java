@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Geldbetrag;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
@@ -124,10 +125,10 @@ public class PlatzVerkaufsWerkzeug
     private void aktualisierePreisanzeige(Set<Platz> plaetze)
     {
     	//TODO Geldbetrag verwenden
-        _ausgewaehlterGesamtbetrag = 0;
+        _ausgewaehlterGesamtbetrag.intconv(0);
         if (istVerkaufenMoeglich(plaetze))
         {
-            Geldbetrag preis = _vorstellung.getPreisFuerPlaetze(plaetze);
+            Geldbetrag preis=Geldbetrag.intconv(_vorstellung.getPreisFuerPlaetze(plaetze));
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: " + preis + " Eurocent");
             _ausgewaehlterGesamtbetrag = preis;
