@@ -13,8 +13,8 @@ public final class Geldbetrag {
 		}
 		else if (cent < 0)
 		{
-			_cent = 100+cent;
-			_euro = euro - 1;
+			_cent = 100-((-cent) % 100);
+			_euro = euro + (cent / 100) -1;
 		}
 		else {
 			_cent = cent;
@@ -53,9 +53,21 @@ public final class Geldbetrag {
 		int centnew = _cent * mult;
 		return Geldbetrag.valueOf(euronew, centnew);
 	}
+	
+	public boolean kleinerGleich(Geldbetrag geldbetrag)
+	{
+		boolean euro = _euro <= geldbetrag.euro();
+		boolean euroeq = _euro == geldbetrag.euro();
+		boolean cent = _cent <= geldbetrag.cent();
+		return euro || (euroeq && cent);
+	}
 
-	public Geldbetrag strconv(String string) {
-		return null;
+	public static Geldbetrag strconv(String eingabe) {
+		String[] zahlen = eingabe.split("[,.]+");
+		int euronew = Integer.parseInt(zahlen[0]);
+		int centnew = Integer.parseInt(zahlen[1]);
+		return Geldbetrag.valueOf(euronew, centnew);
+		
 	}
 	
 	@Override
@@ -68,7 +80,7 @@ public final class Geldbetrag {
 		}
 	}
 
-	public Geldbetrag intconv(int geldbetrag) {
+	public static Geldbetrag intconv(int geldbetrag) {
 		int euronew = geldbetrag / 100;
 		int centnew = geldbetrag % 100;
 		return Geldbetrag.valueOf(euronew, centnew);
