@@ -20,12 +20,14 @@ public class GeldbetragTest
 	public void addTest() 
 	{
 		assertEquals(fiftyFiveEuros,fiftyEuros.add(fiveEuros));
+		assertEquals(Geldbetrag.valueOf(7, 04),sixEurosFourteenCent.add(Geldbetrag.valueOf(0, 90)));
 	}
 	
 	@Test
 	public void subTest() 
 	{
 		assertEquals(fiftyEuros,fiftyFiveEuros.sub(fiveEuros));
+		assertEquals(Geldbetrag.valueOf(5, 99),sixEurosFourteenCent.sub(Geldbetrag.valueOf(0, 15)));
 	}
 	
 	@Test
