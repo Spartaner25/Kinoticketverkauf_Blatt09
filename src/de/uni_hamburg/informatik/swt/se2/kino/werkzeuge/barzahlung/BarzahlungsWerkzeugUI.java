@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * TODO für Blatt 8: Löschen
+ * 
  * 
  * Klasse BarzahlungsWerkzeugUI ist die GUI für die Barbezahlung. Sie besteht
  * aus drei großen Eingabefeldern, von denen das mittlere zur Eingabe gedacht
