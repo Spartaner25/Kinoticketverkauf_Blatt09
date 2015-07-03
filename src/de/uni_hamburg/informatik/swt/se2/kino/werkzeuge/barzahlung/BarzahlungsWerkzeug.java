@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
 /**
- * TODO für Blatt 8: Löschen
+ * 
  * 
  * Das Barzahlungswerkzeug behandelt die Kasseneingabe. Es ermöglicht die
  * Eingabe eines gezahlten Betrags und ermittelt automatisch den Restbetrag zur
@@ -32,9 +32,9 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
  */
 public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
 {
-
+//TODO Geldbetrag verwenden
     private BarzahlungsWerkzeugUI _ui;
-    private int _preis;
+    private Geldbetrag _preis;
     private boolean _barzahlungErfolgreich;
     private boolean _ausreichenderGeldbetrag;
 
@@ -55,8 +55,9 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      * 
      * @param preis der einzunehmende Gelbetrag
      */
-    public void fuehreBarzahlungDurch(int preis)
+    public void fuehreBarzahlungDurch(Geldbetrag preis)
     {
+    	//TODO Geldbetrag verwenden
         _preis = preis;
         _ausreichenderGeldbetrag = false;
         _barzahlungErfolgreich = false;
@@ -162,6 +163,7 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      */
     private void reagiereAufEingabeText(String eingabePreis)
     {
+    	// Geldbetrag verwenden
         if (eingabePreis.isEmpty())
         {
             eingabePreis = "0";
@@ -246,16 +248,18 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      * 
      * @param differenz ein eingegebener Betrag
      */
-    private void zeigeRestbetrag(int differenz)
+    private void zeigeRestbetrag(Geldbetrag differenz)
+    //TODO Geldbetrag verwenden
     {
-        _ui.getRestbetragTextfield().setText(differenz + " Eurocent");
+        _ui.getRestbetragTextfield().setText(differenz + " Euro");
     }
 
     /**
      * Setzt den Preis in der UI.
      */
     private void zeigePreis()
+    // TODO An Geldbetrag anpassen
     {
-        _ui.getPreisTextfield().setText(_preis + " Eurocent");
+        _ui.getPreisTextfield().setText(_preis + " Euro");
     }
 }
