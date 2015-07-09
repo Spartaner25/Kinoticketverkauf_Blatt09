@@ -171,8 +171,8 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
         }
         try
         {
-            Geldbetrag eingabeBetrag = Geldbetrag.intconv(Integer.parseInt(eingabePreis));
-            _ausreichenderGeldbetrag = (_preis.kleinergleich(eingabeBetrag));
+            Geldbetrag eingabeBetrag = Geldbetrag.strconv(eingabePreis);
+            _ausreichenderGeldbetrag = (_preis.kleinerGleich(eingabeBetrag));
             Geldbetrag differenz =eingabeBetrag.sub(_preis);
             zeigeRestbetrag(differenz);
         }
@@ -252,7 +252,7 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
     private void zeigeRestbetrag(Geldbetrag differenz)
     //TODO Geldbetrag verwenden
     {
-        _ui.getRestbetragTextfield().setText(differenz + " Euro");
+        _ui.getRestbetragTextfield().setText(differenz.toString() + " Euro");
     }
 
     /**

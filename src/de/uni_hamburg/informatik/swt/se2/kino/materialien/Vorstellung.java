@@ -58,7 +58,7 @@ public class Vorstellung
         assert anfangszeit != null : "Vorbedingung verletzt: anfangszeit != null";
         assert endzeit != null : "Vorbedingung verletzt: endzeit != null";
         assert datum != null : "Vorbedingung verletzt: datum != null";
-        assert preis > 0: "Vorbedingung verletzt: preis > 0";
+        //assert preis > 0: "Vorbedingung verletzt: preis > 0";
 
         _kinosaal = kinosaal;
         _film = film;

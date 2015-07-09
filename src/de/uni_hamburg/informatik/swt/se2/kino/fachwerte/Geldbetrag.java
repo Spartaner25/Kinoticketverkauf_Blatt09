@@ -2,88 +2,99 @@ package de.uni_hamburg.informatik.swt.se2.kino.fachwerte;
 
 public final class Geldbetrag {
 
-	private final int _euro;
-	private final int _cent;
+	private final int _eurocent;
 	
-	private Geldbetrag(int euro, int cent)
+	private Geldbetrag(int eurocent)
 	{
-		if (cent >= 100) {
-			_cent = cent % 100;
-			_euro = euro + cent /100;
-		}
-		else if (cent < 0)
-		{
-			_cent = 100-((-cent) % 100);
-			_euro = euro + (cent / 100) -1;
-		}
-		else {
-			_cent = cent;
-			_euro = euro;
-		}
+		_eurocent = eurocent;
 	}
 	
 	public int euro()
 	{
-		return _euro;
+		return _eurocent / 100;
 	}
 	
 	public int cent()
 	{
-		return _cent;
+		return _eurocent % 100;
+	}
+	
+	public int eurocent()
+	{
+		return _eurocent;
 	}
 	
 	public static Geldbetrag valueOf(int euro, int cent) {
-		return new Geldbetrag(euro, cent);
+		int eurocent = euro * 100 + cent;
+		return new Geldbetrag(eurocent);
+	}
+	
+	public static Geldbetrag valueOf(int eurocent) {
+		return new Geldbetrag(eurocent);
 	}
 
 	public Geldbetrag add(Geldbetrag geldbetrag) {
-		int euronew = _euro + geldbetrag.euro();
-		int centnew = _cent + geldbetrag.cent();
-		return Geldbetrag.valueOf(euronew, centnew);
+		int eurocent = _eurocent + geldbetrag.eurocent();
+		return Geldbetrag.valueOf(eurocent);
 	}
 
 	public Geldbetrag sub(Geldbetrag geldbetrag) {
-		int euronew = _euro - geldbetrag.euro();
-		int centnew = _cent - geldbetrag.cent();
-		return Geldbetrag.valueOf(euronew, centnew);
+		int eurocent = _eurocent - geldbetrag.eurocent();
+		return Geldbetrag.valueOf(eurocent);
 	}
 
 	public Geldbetrag mul(int mult) {
-		int euronew = _euro * mult;
-		int centnew = _cent * mult;
-		return Geldbetrag.valueOf(euronew, centnew);
+		int eurocent = _eurocent * mult;
+		return Geldbetrag.valueOf(eurocent);
 	}
 	
 	public boolean kleinerGleich(Geldbetrag geldbetrag)
 	{
-		boolean euro = _euro <= geldbetrag.euro();
-		boolean euroeq = _euro == geldbetrag.euro();
-		boolean cent = _cent <= geldbetrag.cent();
-		return euro || (euroeq && cent);
+		return _eurocent <= geldbetrag.eurocent();
 	}
 
 	public static Geldbetrag strconv(String eingabe) {
-		String[] zahlen = eingabe.split("[,.]+");
-		int euronew = Integer.parseInt(zahlen[0]);
-		int centnew = Integer.parseInt(zahlen[1]);
-		return Geldbetrag.valueOf(euronew, centnew);
-		
+		String[] zahlen = eingabe.split("[,]");
+		if (eingabe.contains(",") && zahlen.length > 1)
+		{
+			int euronew = Integer.parseInt(zahlen[0]);
+			int centnew = 0;
+			if (!zahlen[1].isEmpty())
+			{
+				centnew = Integer.parseInt(zahlen[1]);
+			}
+			return Geldbetrag.valueOf(euronew, centnew);
+		}
+		else
+		{
+			return Geldbetrag.valueOf(Integer.parseInt(eingabe) * 100);
+		}
 	}
 	
 	@Override
 	public String toString()
 	{
-		if (_cent < 10) {
-			return ""+_euro+",0"+_cent;
-		} else {
-			return ""+_euro+","+_cent;
+		int euro = euro();
+		int cent = cent();
+		String cent1;
+		if (cent() < 0)
+		{
+			euro = euro * -1;
+			cent = cent * -1;
 		}
+		if (cent() <= 10 || cent() > -10)
+		{
+			cent1 = "0"+cent;
+		}
+		else
+		{
+			cent1 = ""+cent;
+		}
+		return euro+","+cent1;
 	}
 
 	public static Geldbetrag intconv(int geldbetrag) {
-		int euronew = geldbetrag / 100;
-		int centnew = geldbetrag % 100;
-		return Geldbetrag.valueOf(euronew, centnew);
+		return Geldbetrag.valueOf(geldbetrag);
 	}
 	
 	@Override
@@ -94,7 +105,7 @@ public final class Geldbetrag {
 	
 	public boolean equals(Geldbetrag geldbetrag)
 	{
-		return _euro==geldbetrag._euro&&_cent==geldbetrag._cent;
+		return eurocent() == geldbetrag.eurocent();
 	}
 
 }

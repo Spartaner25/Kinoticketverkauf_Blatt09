@@ -125,7 +125,7 @@ public class PlatzVerkaufsWerkzeug
     private void aktualisierePreisanzeige(Set<Platz> plaetze)
     {
     	//TODO Geldbetrag verwenden
-        _ausgewaehlterGesamtbetrag.intconv(0);
+        _ausgewaehlterGesamtbetrag = Geldbetrag.intconv(0);
         if (istVerkaufenMoeglich(plaetze))
         {
             Geldbetrag preis=Geldbetrag.intconv(_vorstellung.getPreisFuerPlaetze(plaetze));
