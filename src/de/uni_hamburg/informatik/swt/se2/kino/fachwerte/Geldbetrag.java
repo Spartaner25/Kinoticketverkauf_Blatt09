@@ -55,7 +55,7 @@ public final class Geldbetrag {
 
 	public static Geldbetrag strconv(String eingabe) throws NumberFormatException
 	{
-		if (morethan(1, eingabe, ','))
+		if (morethan(1, eingabe, ',') || morethan(0, eingabe, '-'))
 		{
 			throw new NumberFormatException();
 		}
