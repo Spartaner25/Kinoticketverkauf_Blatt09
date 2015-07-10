@@ -252,7 +252,7 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
     private void zeigeRestbetrag(Geldbetrag differenz)
     //TODO Geldbetrag verwenden
     {
-        _ui.getRestbetragTextfield().setText(differenz.toString() + " Euro");
+        _ui.getRestbetragTextfield().setText(differenz.toBetragsstring() + " Euro");
     }
 
     /**

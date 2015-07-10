@@ -116,6 +116,10 @@ public final class Geldbetrag {
 		}
 		return euro+","+cent1;
 	}
+	public String toBetragsstring()
+	{
+		return toString().replace("-", "");
+	}
 
 	public static Geldbetrag intconv(int geldbetrag) {
 		return Geldbetrag.valueOf(geldbetrag);
