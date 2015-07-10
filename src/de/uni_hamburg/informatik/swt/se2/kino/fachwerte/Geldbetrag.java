@@ -53,7 +53,12 @@ public final class Geldbetrag {
 		return _eurocent <= geldbetrag.eurocent();
 	}
 
-	public static Geldbetrag strconv(String eingabe) {
+	public static Geldbetrag strconv(String eingabe) throws NumberFormatException
+	{
+		if (morethan(1, eingabe, ','))
+		{
+			throw new NumberFormatException();
+		}
 		String[] zahlen = eingabe.split("[,]");
 		if (eingabe.contains(",") && zahlen.length > 1)
 		{
@@ -61,7 +66,14 @@ public final class Geldbetrag {
 			int centnew = 0;
 			if (!zahlen[1].isEmpty())
 			{
-				centnew = Integer.parseInt(zahlen[1]);
+				if(zahlen[1].length()==1)
+				{
+					centnew = Integer.parseInt(zahlen[1])*10;
+				}
+				else
+				{
+					centnew = Integer.parseInt(zahlen[1]);
+				}
 			}
 			return Geldbetrag.valueOf(euronew, centnew);
 		}
@@ -69,6 +81,18 @@ public final class Geldbetrag {
 		{
 			return Geldbetrag.valueOf(Integer.parseInt(eingabe) * 100);
 		}
+	}
+	
+	private static boolean morethan(int occ, String haystack, char needle)
+	{
+		int count = 0;
+		for (int i = 0; i < haystack.length(); i++) {
+			if (haystack.charAt(i) == needle)
+			{
+				count++;
+			}
+		}
+		return count > occ;
 	}
 	
 	@Override
