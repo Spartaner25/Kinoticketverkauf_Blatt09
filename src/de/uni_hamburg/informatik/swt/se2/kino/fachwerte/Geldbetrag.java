@@ -82,10 +82,10 @@ public final class Geldbetrag {
 			euro = euro * -1;
 			cent = cent * -1;
 		}
-		if (cent() <= 10 || cent() > -10)
+	if ((cent() < 10 && cent() >= 0) || (cent() > -10 && cent() < 0))
 		{
 			cent1 = "0"+cent;
-		}
+		} 
 		else
 		{
 			cent1 = ""+cent;
